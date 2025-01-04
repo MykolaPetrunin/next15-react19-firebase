@@ -1,5 +1,5 @@
-import {Auth} from "@/containers/auth/Auth";
 import {FC} from "react";
+import {Auth} from "@/containers/auth/Auth";
 
 
 const LoginPage: FC = () => {

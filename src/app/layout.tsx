@@ -3,6 +3,7 @@ import "./globals.css";
 import {inter} from "@/configs/fonts";
 import {ThemeProvider} from "@/providers/theme/ThemeProvider";
 import {FC, PropsWithChildren} from "react";
+import {Toaster} from "sonner";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -24,6 +25,7 @@ const RootLayout: FC<PropsWithChildren> = ({
             disableTransitionOnChange
         >
             {children}
+            <Toaster/>
         </ThemeProvider>
         </body>
         </html>

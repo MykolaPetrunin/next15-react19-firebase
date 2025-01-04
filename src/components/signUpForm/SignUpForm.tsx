@@ -4,11 +4,31 @@ import {
     CardContent, CardHeader, CardTitle,
 } from "@/components/ui/card"
 import {Input} from "@/components/ui/input"
-import {Label} from "@/components/ui/label"
 import {FC} from "react";
+import {z} from "zod";
+import {useForm} from "react-hook-form";
+import {signUpSchema} from "@/components/signUpForm/validations";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {SignUpData} from "@/components/signUpForm/types";
 
-export const SignUpForm: FC<{ back: () => void }> =
-    ({back}) => {
+
+export const SignUpForm: FC<{ back: () => void; signUp: (val: SignUpData) => Promise<void> }> =
+    ({back, signUp}) => {
+
+        const form = useForm<z.infer<typeof signUpSchema>>({
+            resolver: zodResolver(signUpSchema),
+            defaultValues: {
+                email: "",
+                password: "",
+                repeatPassword: "",
+            },
+        })
+
+        const onSubmit = async (values: z.infer<typeof signUpSchema>) => {
+            await signUp({email: values.email, password: values.password});
+        }
+
         return (
             <div className="flex flex-col gap-6">
                 <Card>
@@ -16,41 +36,57 @@ export const SignUpForm: FC<{ back: () => void }> =
                         <CardTitle className="text-xl">Sign Up</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <form>
-                            <div className="grid gap-6">
-                                <div className="grid gap-6">
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="email">Email</Label>
-                                        <Input
-                                            id="email"
-                                            type="email"
-                                            placeholder="m@example.com"
-                                            required
-                                        />
-                                    </div>
-                                    <div className="grid gap-2">
-                                        <div className="flex items-center">
-                                            <Label htmlFor="password">Password</Label>
-                                        </div>
-                                        <Input id="password" type="password" required/>
-                                    </div>
-                                    <div className="grid gap-2">
-                                        <div className="flex items-center">
-                                            <Label htmlFor="repeatPassword">Repeat password</Label>
-                                        </div>
-                                        <Input id="repeatPassword" type="password" required/>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <Button type="button" variant="secondary" className="grow" onClick={back}>
-                                            Back
-                                        </Button>
-                                        <Button type="submit" className="grow">
-                                            Sign Up
-                                        </Button>
-                                    </div>
+                        <Form {...form}>
+                            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
+                                <FormField
+                                    control={form.control}
+                                    name="email"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormLabel>Email</FormLabel>
+                                            <FormControl>
+                                                <Input placeholder="m@example.com" {...field} />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="password"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormLabel>Password</FormLabel>
+                                            <FormControl>
+                                                <Input type="password" placeholder="Password" {...field} />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="repeatPassword"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormLabel>Repeat password</FormLabel>
+                                            <FormControl>
+                                                <Input type="password" placeholder="Repeat password" {...field} />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
+                                />
+                                <div className="grid grid-cols-2 gap-3">
+                                    <Button type="button" variant="secondary" className="grow" onClick={back}>
+                                        Back
+                                    </Button>
+                                    <Button type="submit" className="grow" disabled={form.formState.isSubmitting}>
+                                        {form.formState.isSubmitting ? "Loading..." : "Sign Up"}
+                                    </Button>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </Form>
                     </CardContent>
                 </Card>
             </div>
