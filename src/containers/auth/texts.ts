@@ -31,5 +31,8 @@ export const authTexts = {
         [SinInWithPopupErrorCodes.InvalidCredential]: 'Invalid credential',
         [SinInWithPopupErrorCodes.InvalidEmail]: 'Invalid email',
         [SinInWithPopupErrorCodes.UnauthorizedDomain]: 'Unauthorized domain'
+    },
+    signOutErrors: {
+        unknown: '"An unknown error occurred during logout"'
     }
 }
