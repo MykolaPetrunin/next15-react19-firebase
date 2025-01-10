@@ -11,6 +11,7 @@ import {signUpSchema} from "@/components/signUpForm/validations";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {SignUpData} from "@/components/signUpForm/types";
+import {signUpFormTexts} from "@/components/signUpForm/texts";
 
 
 export const SignUpForm: FC<{ back: () => void; signUp: (val: SignUpData) => Promise<void> }> =
@@ -33,19 +34,19 @@ export const SignUpForm: FC<{ back: () => void; signUp: (val: SignUpData) => Pro
             <div className="flex flex-col gap-6">
                 <Card>
                     <CardHeader className="text-center">
-                        <CardTitle className="text-xl">Sign Up</CardTitle>
+                        <CardTitle className="text-xl">{signUpFormTexts.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
+                            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
                                 <FormField
                                     control={form.control}
                                     name="email"
                                     render={({field}) => (
                                         <FormItem>
-                                            <FormLabel>Email</FormLabel>
+                                            <FormLabel>{signUpFormTexts.inputs.email.label}</FormLabel>
                                             <FormControl>
-                                                <Input placeholder="m@example.com" {...field} />
+                                                <Input placeholder={signUpFormTexts.inputs.email.placeholder} {...field} />
                                             </FormControl>
                                             <FormMessage/>
                                         </FormItem>
@@ -56,9 +57,9 @@ export const SignUpForm: FC<{ back: () => void; signUp: (val: SignUpData) => Pro
                                     name="password"
                                     render={({field}) => (
                                         <FormItem>
-                                            <FormLabel>Password</FormLabel>
+                                            <FormLabel>{signUpFormTexts.inputs.password.label}</FormLabel>
                                             <FormControl>
-                                                <Input type="password" placeholder="Password" {...field} />
+                                                <Input type="password" placeholder={signUpFormTexts.inputs.password.placeholder} {...field} />
                                             </FormControl>
                                             <FormMessage/>
                                         </FormItem>
@@ -69,9 +70,9 @@ export const SignUpForm: FC<{ back: () => void; signUp: (val: SignUpData) => Pro
                                     name="repeatPassword"
                                     render={({field}) => (
                                         <FormItem>
-                                            <FormLabel>Repeat password</FormLabel>
+                                            <FormLabel>{signUpFormTexts.inputs.repeatPassword.label}</FormLabel>
                                             <FormControl>
-                                                <Input type="password" placeholder="Repeat password" {...field} />
+                                                <Input type="password" placeholder={signUpFormTexts.inputs.repeatPassword.placeholder} {...field} />
                                             </FormControl>
                                             <FormMessage/>
                                         </FormItem>
@@ -79,10 +80,10 @@ export const SignUpForm: FC<{ back: () => void; signUp: (val: SignUpData) => Pro
                                 />
                                 <div className="grid grid-cols-2 gap-3">
                                     <Button type="button" variant="secondary" className="grow" onClick={back}>
-                                        Back
+                                        {signUpFormTexts.buttons.back}
                                     </Button>
                                     <Button type="submit" className="grow" disabled={form.formState.isSubmitting}>
-                                        {form.formState.isSubmitting ? "Loading..." : "Sign Up"}
+                                        {form.formState.isSubmitting ? signUpFormTexts.buttons.loading : signUpFormTexts.buttons.signUp}
                                     </Button>
                                 </div>
                             </form>

@@ -1,22 +1,23 @@
 import {z} from "zod";
+import {signUpFormTexts} from "@/components/signUpForm/texts";
 
 export const signUpSchema = z
     .object({
-        email: z.string().email("Invalid email format"),
+        email: z.string().email(signUpFormTexts.inputs.email.error),
         password: z
             .string()
-            .min(8, "Password must be at least 8 characters long")
-            .max(4096, "Password must be no more than 4096 characters long")
-            .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-            .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-            .regex(/\d/, "Password must contain at least one numeric character")
-            .regex(/[@$!%*?&#^+=]/, "Password must contain at least one special character"),
+            .min(8, signUpFormTexts.inputs.password.errors.minLength)
+            .max(4096, signUpFormTexts.inputs.password.errors.maxLength)
+            .regex(/[A-Z]/, signUpFormTexts.inputs.password.errors.uppercase)
+            .regex(/[a-z]/, signUpFormTexts.inputs.password.errors.lowercase)
+            .regex(/\d/, signUpFormTexts.inputs.password.errors.numeric)
+            .regex(/[@$!%*?&#^+=]/, signUpFormTexts.inputs.password.errors.special),
         repeatPassword: z.string(),
     })
     .refine(
         (data) => data.password === data.repeatPassword,
         {
-            message: "Passwords must match",
+            message: signUpFormTexts.inputs.repeatPassword.error,
             path: ["repeatPassword"],
         }
     );

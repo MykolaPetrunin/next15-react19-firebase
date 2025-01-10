@@ -1,7 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 import {appPaths} from "@/configs/appPaths";
 
-const publicPaths = [appPaths.auth.login];
+const publicPaths = [appPaths.auth.login, appPaths.auth.setNewPassword];
 
 export async function middleware(request: NextRequest) {
     const requestHeaders = new Headers(request.headers);

@@ -1,5 +1,6 @@
 import {FirebaseApp, initializeApp} from 'firebase/app';
 import {Auth, getAuth} from 'firebase/auth';
+import {initializeAppCheck, ReCaptchaV3Provider} from "@firebase/app-check";
 
 let app: FirebaseApp | undefined;
 let auth: Auth | undefined;
@@ -15,6 +16,12 @@ const getFirebaseAuth = () => {
             appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
             measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
         });
+        if (typeof window !== 'undefined') {
+            initializeAppCheck(app, {
+                provider: new ReCaptchaV3Provider(process.env.NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY!),
+                isTokenAutoRefreshEnabled: true
+            });
+        }
     }
     if (!auth) {
         auth = getAuth(app);
