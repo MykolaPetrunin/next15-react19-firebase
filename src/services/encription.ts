@@ -1,4 +1,4 @@
-import {randomBytes, createCipheriv, createDecipheriv} from 'crypto';
+import { randomBytes, createCipheriv, createDecipheriv } from 'crypto';
 
 if (!process.env.SECRET) {
     throw new Error('Environment variable SECRET is not defined.');

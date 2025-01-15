@@ -1,6 +1,6 @@
-import {FirebaseApp, initializeApp} from 'firebase/app';
-import {Auth, getAuth} from 'firebase/auth';
-import {initializeAppCheck, ReCaptchaV3Provider} from "@firebase/app-check";
+import { FirebaseApp, initializeApp } from 'firebase/app';
+import { Auth, getAuth } from 'firebase/auth';
+import { initializeAppCheck, ReCaptchaV3Provider } from '@firebase/app-check';
 
 let app: FirebaseApp | undefined;
 let auth: Auth | undefined;

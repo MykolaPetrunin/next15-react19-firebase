@@ -1,7 +1,8 @@
-import getFirebaseAuth from "@/containers/auth/services/getFirebaseAuth";
-import {useCallback} from "react";
-import {signOut as signOutFirebase} from "firebase/auth";
-import {logOut} from "@/containers/auth/services/logOut";
+import { useCallback } from 'react';
+import { signOut as signOutFirebase } from 'firebase/auth';
+
+import getFirebaseAuth from '@/containers/auth/services/getFirebaseAuth';
+import { logOut } from '@/containers/auth/services/logOut';
 
 export const useSignOut = () => {
     return useCallback(async () => {
@@ -10,4 +11,4 @@ export const useSignOut = () => {
         await signOutFirebase(auth);
         await logOut();
     }, []);
-}
+};

@@ -1,7 +1,9 @@
 'use client';
-import {FC, useCallback, useState} from "react";
-import {Button} from "@/components/ui/button";
-import {useSignOut} from "@/containers/auth/hooks/useSignOut";
+
+import { FC, useCallback, useState } from 'react';
+
+import { Button } from '@/components/ui/button';
+import { useSignOut } from '@/containers/auth/hooks/useSignOut';
 
 export const SignOutButton: FC = () => {
     const signOut = useSignOut();
@@ -11,7 +13,11 @@ export const SignOutButton: FC = () => {
         setLoading(true);
         await signOut();
         setLoading(false);
-    }, [signOut])
+    }, [signOut]);
 
-    return <Button variant="outline" disabled={loading} onClick={handleSignOut}>Sign Out</Button>;
-}
+    return (
+        <Button variant="outline" disabled={loading} onClick={handleSignOut}>
+            Sign Out
+        </Button>
+    );
+};

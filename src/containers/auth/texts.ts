@@ -1,26 +1,21 @@
-import {
-    ResetPasswordErrorCodes,
-    SignUpErrorCodes,
-    SinInWithPasswordErrorCodes,
-    SinInWithPopupErrorCodes
-} from "@/containers/auth/types";
+import { ResetPasswordErrorCodes, SignUpErrorCodes, SinInWithPasswordErrorCodes, SinInWithPopupErrorCodes } from '@/containers/auth/types';
 
 export const authTexts = {
     signUpErrors: {
         [SignUpErrorCodes.AlreadyInUse]: 'Email already exists',
         [SignUpErrorCodes.InvalidEmail]: 'Invalid email',
         [SignUpErrorCodes.OperationNotAllowed]: 'Email/password sign-in is disabled',
-        [SignUpErrorCodes.WeakPassword]: 'Password is too weak',
+        [SignUpErrorCodes.WeakPassword]: 'Password is too weak'
     },
     resetPasswordErrors: {
         [ResetPasswordErrorCodes.InvalidEmail]: 'Invalid email',
-        [ResetPasswordErrorCodes.UserNotFound]: 'User not found',
+        [ResetPasswordErrorCodes.UserNotFound]: 'User not found'
     },
     signInWithPasswordErrors: {
         [SinInWithPasswordErrorCodes.InvalidEmail]: 'Invalid email',
         [SinInWithPasswordErrorCodes.UserNotFound]: 'User not found',
         [SinInWithPasswordErrorCodes.WrongPassword]: 'Wrong password',
-        [SinInWithPasswordErrorCodes.UserDisabled]: 'User is disabled',
+        [SinInWithPasswordErrorCodes.UserDisabled]: 'User is disabled'
     },
     signInWithPopupErrors: {
         [SinInWithPopupErrorCodes.PopupClosedByUser]: 'Popup closed by user',
@@ -35,4 +30,4 @@ export const authTexts = {
     signOutErrors: {
         unknown: '"An unknown error occurred during logout"'
     }
-}
+};

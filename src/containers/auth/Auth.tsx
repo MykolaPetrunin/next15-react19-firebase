@@ -1,31 +1,19 @@
 'use client';
 
-import {LoginForm} from "@/components/loginForm/LoginForm";
-import {FC, useCallback, useState} from "react";
-import {
-    AuthState,
-    ResetPasswordError,
-    SignUpError,
-    SinInWithPasswordError,
-    SinInWithPopupError
-} from "@/containers/auth/types";
-import {SignUpForm} from "@/components/signUpForm/SignUpForm";
-import {ResetPasswordForm} from "@/components/resetPasswordForm/ResetPasswordForm";
-import {SignUpData} from "@/components/signUpForm/types";
-import {
-    createUserWithEmailAndPassword,
-    sendPasswordResetEmail,
-    signInWithEmailAndPassword,
-    signInWithPopup,
-    GoogleAuthProvider
-} from 'firebase/auth';
-import getFirebaseAuth from "@/containers/auth/services/getFirebaseAuth";
-import {logIn} from "@/containers/auth/services/logIn";
-import {toast} from "sonner";
-import {authTexts} from "@/containers/auth/texts";
-import {ResetPasswordData} from "@/components/resetPasswordForm/types";
-import {SignInData} from "@/components/loginForm/types";
+import { FC, useCallback, useState } from 'react';
+import { createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { toast } from 'sonner';
 
+import { LoginForm } from '@/components/loginForm/LoginForm';
+import { AuthState, ResetPasswordError, SignUpError, SinInWithPasswordError, SinInWithPopupError } from '@/containers/auth/types';
+import { SignUpForm } from '@/components/signUpForm/SignUpForm';
+import { ResetPasswordForm } from '@/components/resetPasswordForm/ResetPasswordForm';
+import { SignUpData } from '@/components/signUpForm/types';
+import getFirebaseAuth from '@/containers/auth/services/getFirebaseAuth';
+import { logIn } from '@/containers/auth/services/logIn';
+import { authTexts } from '@/containers/auth/texts';
+import { ResetPasswordData } from '@/components/resetPasswordForm/types';
+import { SignInData } from '@/components/loginForm/types';
 
 export const Auth: FC = () => {
     const [currentState, setCurrentState] = useState<AuthState>(AuthState.Login);
@@ -43,12 +31,12 @@ export const Auth: FC = () => {
             if (!message) return;
 
             toast.error(message, {
-                position: 'top-right',
+                position: 'top-right'
             });
         }
     }, []);
 
-    const handleResetPassword = useCallback(async ({email}: ResetPasswordData): Promise<boolean> => {
+    const handleResetPassword = useCallback(async ({ email }: ResetPasswordData): Promise<boolean> => {
         try {
             await sendPasswordResetEmail(getFirebaseAuth(), email);
             return true;
@@ -60,7 +48,7 @@ export const Auth: FC = () => {
             if (!message) return false;
 
             toast.error(message, {
-                position: 'top-right',
+                position: 'top-right'
             });
             return false;
         }
@@ -79,7 +67,7 @@ export const Auth: FC = () => {
             if (!message) return;
 
             toast.error(message, {
-                position: 'top-right',
+                position: 'top-right'
             });
         }
     }, []);
@@ -98,22 +86,25 @@ export const Auth: FC = () => {
             if (!message) return;
 
             toast.error(message, {
-                position: 'top-right',
+                position: 'top-right'
             });
         }
     }, []);
 
-    return <>
-        {currentState === AuthState.Login &&
-            <LoginForm
-                signIn={handleSignInWithPassword}
-                signUp={() => setCurrentState(AuthState.SignUp)}
-                signInWithGoogle={handleSignInWithPopup}
-                resetPassword={() => setCurrentState(AuthState.ResetPassword)}/>}
-        {currentState === AuthState.SignUp &&
-            <SignUpForm back={() => setCurrentState(AuthState.Login)} signUp={handleSignUp}/>}
-        {currentState === AuthState.ResetPassword &&
-            <ResetPasswordForm key={currentState} resetPassword={handleResetPassword}
-                               back={() => setCurrentState(AuthState.Login)}/>}
-    </>;
-}
+    return (
+        <>
+            {currentState === AuthState.Login && (
+                <LoginForm
+                    signIn={handleSignInWithPassword}
+                    signUp={() => setCurrentState(AuthState.SignUp)}
+                    signInWithGoogle={handleSignInWithPopup}
+                    resetPassword={() => setCurrentState(AuthState.ResetPassword)}
+                />
+            )}
+            {currentState === AuthState.SignUp && <SignUpForm back={() => setCurrentState(AuthState.Login)} signUp={handleSignUp} />}
+            {currentState === AuthState.ResetPassword && (
+                <ResetPasswordForm key={currentState} resetPassword={handleResetPassword} back={() => setCurrentState(AuthState.Login)} />
+            )}
+        </>
+    );
+};

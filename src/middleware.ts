@@ -1,12 +1,12 @@
-import {NextRequest, NextResponse} from "next/server";
-import {appPaths} from "@/configs/appPaths";
+import { NextRequest, NextResponse } from 'next/server';
+
+import { appPaths } from '@/configs/appPaths';
 
 const publicPaths = [appPaths.auth.login, appPaths.auth.setNewPassword];
 
 export async function middleware(request: NextRequest) {
     const requestHeaders = new Headers(request.headers);
 
-    console.log(request.nextUrl.pathname)
     if (publicPaths.includes(request.nextUrl.pathname)) {
         return NextResponse.next({
             request: {
@@ -20,8 +20,6 @@ export async function middleware(request: NextRequest) {
     if (!token) {
         return NextResponse.redirect(new URL(appPaths.auth.login, request.url));
     }
-
-
 }
 
 export const config = {

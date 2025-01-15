@@ -29,4 +29,4 @@ export const signUpFormTexts = {
             error: 'Passwords do not match'
         }
     }
-}
+};

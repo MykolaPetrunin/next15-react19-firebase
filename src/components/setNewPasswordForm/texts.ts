@@ -33,4 +33,4 @@ export const setNewPasswordFormTexts = {
         title: 'Password set',
         description: 'Your password has been successfully set. You can now log in with your new password.'
     }
-}
+};

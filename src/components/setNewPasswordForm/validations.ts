@@ -1,5 +1,6 @@
-import {z} from "zod";
-import {setNewPasswordFormTexts} from "@/components/setNewPasswordForm/texts";
+import { z } from 'zod';
+
+import { setNewPasswordFormTexts } from '@/components/setNewPasswordForm/texts';
 
 export const setNewPasswordSchema = z
     .object({
@@ -11,12 +12,9 @@ export const setNewPasswordSchema = z
             .regex(/[a-z]/, setNewPasswordFormTexts.inputs.password.errors.lowercase)
             .regex(/\d/, setNewPasswordFormTexts.inputs.password.errors.numeric)
             .regex(/[@$!%*?&#^+=]/, setNewPasswordFormTexts.inputs.password.errors.special),
-        repeatPassword: z.string(),
+        repeatPassword: z.string()
     })
-    .refine(
-        (data) => data.password === data.repeatPassword,
-        {
-            message: setNewPasswordFormTexts.inputs.repeatPassword.error,
-            path: ["repeatPassword"],
-        }
-    );
+    .refine((data) => data.password === data.repeatPassword, {
+        message: setNewPasswordFormTexts.inputs.repeatPassword.error,
+        path: ['repeatPassword']
+    });

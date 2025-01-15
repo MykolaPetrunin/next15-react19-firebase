@@ -1,14 +1,14 @@
 export enum AuthState {
     Login = 'login',
     SignUp = 'register',
-    ResetPassword = 'resetPassword',
+    ResetPassword = 'resetPassword'
 }
 
 export enum SignUpErrorCodes {
     AlreadyInUse = 'auth/email-already-in-use',
     InvalidEmail = 'auth/invalid-email',
     OperationNotAllowed = 'auth/operation-not-allowed',
-    WeakPassword = 'auth/weak-password',
+    WeakPassword = 'auth/weak-password'
 }
 
 export interface SignUpError {
@@ -17,7 +17,7 @@ export interface SignUpError {
 
 export enum ResetPasswordErrorCodes {
     InvalidEmail = 'auth/invalid-email',
-    UserNotFound = 'auth/user-not-found',
+    UserNotFound = 'auth/user-not-found'
 }
 
 export interface ResetPasswordError {
@@ -28,7 +28,7 @@ export enum SinInWithPasswordErrorCodes {
     InvalidEmail = 'auth/invalid-email',
     UserNotFound = 'auth/user-not-found',
     WrongPassword = 'auth/wrong-password',
-    UserDisabled = 'auth/user-disabled',
+    UserDisabled = 'auth/user-disabled'
 }
 
 export interface SinInWithPasswordError {
@@ -43,7 +43,7 @@ export enum SinInWithPopupErrorCodes {
     AccountExistsWithDifferentCredential = 'auth/account-exists-with-different-credential',
     InvalidCredential = 'auth/invalid-credential',
     InvalidEmail = 'auth/invalid-email',
-    UnauthorizedDomain = 'auth/unauthorized-domain',
+    UnauthorizedDomain = 'auth/unauthorized-domain'
 }
 
 export interface SinInWithPopupError {

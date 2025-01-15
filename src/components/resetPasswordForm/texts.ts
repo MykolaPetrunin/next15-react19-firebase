@@ -15,4 +15,4 @@ export const resetPasswordFormTexts = {
         title: 'Email Sent',
         subTitle: 'Please check your email for further instructions.'
     }
-}
+};

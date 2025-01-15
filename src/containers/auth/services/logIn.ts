@@ -1,10 +1,11 @@
 'use server';
 
-import {encrypt} from "@/services/encription";
-import {cookies} from "next/headers";
-import {appPaths} from "@/configs/appPaths";
-import {redirect} from "next/navigation";
-import {cookiesTokenName} from "@/containers/auth/configs";
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+
+import { encrypt } from '@/services/encription';
+import { appPaths } from '@/configs/appPaths';
+import { cookiesTokenName } from '@/containers/auth/configs';
 
 const YEAR_IN_SECONDS = 60 * 60 * 24 * 365;
 
