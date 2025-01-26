@@ -17,7 +17,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
         <html lang="en">
             <body className={inter.className}>
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                    {children}
+                    <main>{children}</main>
                     <Toaster />
                 </ThemeProvider>
             </body>

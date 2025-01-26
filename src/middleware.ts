@@ -1,23 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { appPaths } from '@/configs/appPaths';
+import { cookiesUser } from '@/containers/auth/configs';
 
-const publicPaths = [appPaths.auth.login, appPaths.auth.setNewPassword];
+const authPaths = [appPaths.auth.login, appPaths.auth.setNewPassword];
 
 export async function middleware(request: NextRequest) {
     const requestHeaders = new Headers(request.headers);
 
-    if (publicPaths.includes(request.nextUrl.pathname)) {
-        return NextResponse.next({
-            request: {
-                headers: requestHeaders
-            }
-        });
+    const user = request.cookies.get(cookiesUser)?.value;
+
+    if (authPaths.includes(request.nextUrl.pathname)) {
+        if (!user)
+            return NextResponse.next({
+                request: {
+                    headers: requestHeaders
+                }
+            });
+        return NextResponse.redirect(new URL(appPaths.home, request.url));
     }
 
-    const token = request.cookies.get('firebaseToken')?.value;
-
-    if (!token) {
+    if (!user) {
         return NextResponse.redirect(new URL(appPaths.auth.login, request.url));
     }
 }

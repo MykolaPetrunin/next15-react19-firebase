@@ -22,7 +22,12 @@ export const Auth: FC = () => {
         try {
             const res = await createUserWithEmailAndPassword(getFirebaseAuth(), data.email, data.password);
 
-            await logIn(await res.user.getIdToken(true));
+            await logIn({
+                token: await res.user.getIdToken(true),
+                email: res.user.email as string,
+                ...(res.user.displayName && { name: res.user.displayName }),
+                ...(res.user.photoURL && { avatar: res.user.photoURL })
+            });
         } catch (err) {
             const error = err as SignUpError;
 
@@ -58,7 +63,12 @@ export const Auth: FC = () => {
         try {
             const res = await signInWithEmailAndPassword(getFirebaseAuth(), val.email, val.password);
 
-            await logIn(await res.user.getIdToken(true));
+            await logIn({
+                token: await res.user.getIdToken(true),
+                email: res.user.email as string,
+                ...(res.user.displayName && { name: res.user.displayName }),
+                ...(res.user.photoURL && { avatar: res.user.photoURL })
+            });
         } catch (err) {
             const error = err as SinInWithPasswordError;
 
@@ -77,7 +87,12 @@ export const Auth: FC = () => {
             const providerGoogle = new GoogleAuthProvider();
             const res = await signInWithPopup(getFirebaseAuth(), providerGoogle);
 
-            await logIn(await res.user.getIdToken(true));
+            await logIn({
+                token: await res.user.getIdToken(true),
+                email: res.user.email as string,
+                ...(res.user.displayName && { name: res.user.displayName }),
+                ...(res.user.photoURL && { avatar: res.user.photoURL })
+            });
         } catch (err) {
             const error = err as SinInWithPopupError;
 

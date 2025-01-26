@@ -1,1 +1,1 @@
-export const cookiesTokenName = 'firebaseToken';
+export const cookiesUser = 'currentUser';
